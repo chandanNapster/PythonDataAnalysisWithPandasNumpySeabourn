@@ -1,0 +1,57 @@
+import numpy as np
+
+file = ['D:\OneDrive - BENNETT UNIVERSITY\Desktop\Python Workbook\Gita.txt']
+
+
+text = ""
+for fl in file:
+    with open(fl, 'r', encoding='utf8') as txt:
+        text += txt.read()
+
+
+tokens = text.lower().split()
+distinct_tokens = list(set(tokens))
+state_dict = dict([(data, index) for index, data in enumerate(distinct_tokens)])
+
+row = len(distinct_tokens)
+col = len(distinct_tokens)
+
+my_matrix = np.zeros((row,col))
+
+for i in range(len(tokens) - 1):
+    rw = state_dict[tokens[i]]
+    cl = state_dict[tokens[i+1]]
+    my_matrix[rw][cl] += 1
+
+
+current_state_index = np.random.randint(len(distinct_tokens))
+current_state = distinct_tokens[current_state_index]
+output = current_state + " "
+num_of_sentences = 0
+
+while num_of_sentences <= 3000:
+    row_1 = my_matrix[[state_dict[current_state]],:]
+    # print(row)
+    row_1 = row_1.flatten()
+    # row = row/1.0
+    if row_1.sum() != 0:
+        prob = row_1 / row_1.sum()
+    my_matrix[[state_dict[current_state]],:] = prob 
+    next_state_index = np.random.choice(len(distinct_tokens), 10, p=prob)
+    next_state = distinct_tokens[next_state_index[0]]
+    output += next_state
+    output += " "
+    # print(next_state)
+
+    if next_state[-1] in ['.', '!', '?']:
+        num_of_sentences += 1
+        output += '\n'
+    current_state = next_state
+
+print(output)
+# for i in range(row):
+#     for j in range(col):
+#         if 0 < my_matrix[i][j] < 1: print((i,j,my_matrix[i][j]))
+
+
+   
