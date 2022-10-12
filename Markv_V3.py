@@ -1,12 +1,16 @@
 import numpy as np
+import re 
 
-
-file = ['D:\OneDrive - BENNETT UNIVERSITY\Desktop\Python Workbook\Gita.txt']
+file = ['D:\OneDrive - BENNETT UNIVERSITY\BU\Reserach\Python Dev Work\PythonDataAnalysisWithPandasNumpySeabourn\Gita.txt']
 
 text = ""
 for fl in file:
     with open(fl,'r', encoding='utf8') as txt:
         text += txt.read()
+text = text[:500]
+# STEP 0 -- USE OF REGEX TO CREATE BETTER TOKENS
+text = re.sub("[^A-z,.!?\n ]", "", text)
+print(text)
 
 # STEP 1 -- EXTRACT ALL THE TOKENS THEN MAKE THEM DISTINCT AND THEN CREATE A DICTIONARY
 tokens = text.lower().split()
@@ -52,4 +56,4 @@ while num_of_sentences <= 50:
     current_state = next_state
 
 
-print(output)
+# print(output)

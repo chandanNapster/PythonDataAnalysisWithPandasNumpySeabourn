@@ -1,6 +1,7 @@
 import numpy as np
+import re
 
-file = ['D:\OneDrive - BENNETT UNIVERSITY\Desktop\Python Workbook\Gita.txt']
+file = ['D:\OneDrive - BENNETT UNIVERSITY\BU\Reserach\Python Dev Work\PythonDataAnalysisWithPandasNumpySeabourn\Gita.txt']
 
 
 text = ""
@@ -8,6 +9,15 @@ for fl in file:
     with open(fl, 'r', encoding='utf8') as txt:
         text += txt.read()
 
+
+# IMPORVING THE TEXT WITH re
+
+text = re.sub("[^A-z,.!?\n' ]+", "", text)
+# THIS IS NEEDED FOR TOKENIZING THE PUNCUTATIONS THE \1 is called as the capture syntax and () are put on the re. 
+# r is put in front of \1 so that it is interpreted as a raw string
+text = re.sub("([.,!?])", r" \1 ", text)
+
+# print(text)
 
 tokens = text.lower().split()
 distinct_tokens = list(set(tokens))

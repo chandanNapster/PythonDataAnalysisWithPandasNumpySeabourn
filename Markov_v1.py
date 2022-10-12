@@ -4,7 +4,7 @@ import pandas as pd
 from scipy.sparse import csr_matrix
 
 
-file = ["D:\OneDrive - BENNETT UNIVERSITY\Desktop\Python Workbook\Gita.txt"]
+file = ["D:\OneDrive - BENNETT UNIVERSITY\BU\Reserach\Python Dev Work\PythonDataAnalysisWithPandasNumpySeabourn\Gita.txt"]
 
 text = ""
 for book_file in file:
